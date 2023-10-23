@@ -1,26 +1,26 @@
 import React from "react";
-import logo from "../../../../assets/logo.svg";
-
 import { Link, NavLink } from "react-router-dom";
-
-const Navbar = () => {
+import logo from '../../../../assets/logo.svg'
+const Navbar2 = () => {
   const navItems = (
     <>
       <li>
         <NavLink to="/">Home</NavLink>
       </li>
       <li>
-        <NavLink to="/about">About</NavLink>
+        <NavLink to="/order">Order</NavLink>
       </li>
       <li>
-        <NavLink to="/service">Services</NavLink>
+        <NavLink to="/orderReview">Order Review</NavLink>
+    
       </li>
       <li>
-        <NavLink to="/blog">Blog</NavLink>
+        <NavLink to="/manage"> Manage Inventory</NavLink>
       </li>
       <li>
-        <NavLink to="/contact">Contact</NavLink>
+        <NavLink to="/login">Login</NavLink>
       </li>
+      
     </>
   );
 
@@ -51,22 +51,16 @@ const Navbar = () => {
             {navItems}
           </ul>
         </div>
-        <Link className="btn btn-ghost normal-case ">
+        <Link to = '/' className="btn btn-ghost normal-case ">
           <img className="w-[65px] lg:w-[90px]" src={logo} alt="" />
         </Link>
       </div>
-      <div className="navbar-center hidden  lg:flex">
+      <div className="navbar-end hidden  lg:flex">
         <ul className="menu menu-horizontal mt-4 font-bold px-1">{navItems}</ul>
       </div>
-      <div className="navbar-end">
-        <Link to="/login">
-          <button className="btn btn-outline font-bold outline-[#FF3811] text-[#FF3811]">
-            Appointment
-          </button>
-        </Link>
-      </div>
+     
     </div>
   );
 };
 
-export default Navbar;
+export default Navbar2;

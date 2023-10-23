@@ -31,6 +31,7 @@ const Service = () => {
           <ServiceCard key={service._id} service={service}></ServiceCard>
         ))}
       </div>
+      <button>see more</button>
     </div>
   );
 };

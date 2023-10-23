@@ -7,7 +7,7 @@ const About = () => {
     <div className="lg:py-8 bg-gray-100 px-4 lg:px-16 py-3 lg:mt-8">
       <div className="grid grid-cols-1  items-center justify-center lg:grid-cols-2 gap-3">
 
-        <div className="relative md:mx-auto mb-6 order-2  lg:order-1  mt-2 lg:mt-0">
+        <div className="relative md:mx-auto lg:mx-0 mb-6 order-2  lg:order-1  mt-2 lg:mt-0">
           <img
             className="w-[320px] lg:w-[400px] h-[320px] lg:h-[453px] rounded-lg"
             src={person}
