@@ -1,15 +1,44 @@
-import React from "react";
+import React, { useContext } from "react";
 import Navbar2 from "../Shared/Navbar2/Navbar2";
 import img from "../../../assets/images/login/login.svg";
-import { BiLogoFacebook, BiLogoGooglePlus, BiLogoTwitter } from "react-icons/bi";
+import {
+  BiLogoFacebook,
+  BiLogoGooglePlus,
+  BiLogoTwitter,
+} from "react-icons/bi";
 import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router-dom";
-
+import { authContext } from "../../Provider/AuthProvider";
+import toast, { Toaster } from "react-hot-toast";
 
 const Register = () => {
+  const { handleSignUp } = useContext(authContext);
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const password = form.password.value;
+
+    const formData = { name, email, password };
+    console.log(formData);
+
+    //!signUp
+    handleSignUp(email, password)
+      .then((res) => {
+        console.log(res.user);
+        toast.success("user created successfully");
+      })
+      .catch((err) => {
+        toast.error(err.message);
+      });
+  };
+
   return (
     <div>
       <Navbar2></Navbar2>
+      <Toaster />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 px-10">
         <div className="lg:h-[80vh] flex items-center">
@@ -20,7 +49,7 @@ const Register = () => {
           <h2 className="text-center text-2xl lg:text-3xl py-6 font-bold">
             Sign Up
           </h2>
-          <form className="px-4 py-3">
+          <form onSubmit={handleRegister} className="px-4 py-3">
             <div className="space-y-2 mb-5">
               <span className="ml-2 font-semibold">Name</span> <br />
               <input
@@ -53,7 +82,10 @@ const Register = () => {
                 placeholder="Password"
               />
             </div>
-            <button className="py-2 lg:py-3 bg-[#FF3811] text-white w-full mt-4 lg:mt-7 rounded-lg">
+            <button
+              type="submit"
+              className="py-2 lg:py-3 bg-[#FF3811] text-white w-full mt-4 lg:mt-7 rounded-lg"
+            >
               Sign Up
             </button>
             <div className="text-center py-4">

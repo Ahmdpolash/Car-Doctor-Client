@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import ServiceCard from "./ServiceCard";
+import icon1 from "../../../../assets/icons/time.png";
+import icon2 from "../../../../assets/icons/phone.png";
+import icon3 from "../../../../assets/icons/g.png";
 
 const Service = () => {
   const [services, setServices] = useState([]);
@@ -31,7 +34,36 @@ const Service = () => {
           <ServiceCard key={service._id} service={service}></ServiceCard>
         ))}
       </div>
-      <button>see more</button>
+      <button className="px-5  font-bold text-[#EF3811] py-3 border border-[#EF3811] rounded-md text-center mx-auto block mt-4">
+        More Services
+      </button>
+
+      <div className="bg-[#151515] w-full h-[200px] rounded-md my-6 lg:my-12">
+        <div className="flex flex-col lg:flex-row h-full px-4 lg:px-12 justify-between items-center">
+
+          <div className="flex gap-3 items-center ">
+            <img className="w-[35px]"src={icon1} alt="" />
+            <div className="text-white">
+              <h3 className="text-[16px] font-medium">We are open monday-friday</h3>
+              <p  className="font-bold text-2xl">7:00 am - 9:00 pm</p>
+            </div>
+          </div>
+          <div className="flex  gap-3 items-center">
+            <img className="w-[35px]" src={icon2} alt="" />
+            <div className="text-white">
+              <h3 className="text-[16px] font-medium">Have a question?</h3>
+              <p className="font-bold text-2xl">+2546 251 2658</p>
+            </div>
+          </div>
+          <div className="flex gap-3 items-center">
+            <img className="w-[35px]" src={icon3} alt="" />
+            <div className="text-white">
+              <h3 className="text-[16px] font-medium">Need a repair? our address</h3>
+              <p className="font-bold text-2xl">Liza Street, New York</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
