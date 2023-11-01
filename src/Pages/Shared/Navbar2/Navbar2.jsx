@@ -1,7 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import logo from '../../../../assets/logo.svg'
+import { authContext } from "../../../Provider/AuthProvider";
 const Navbar2 = () => {
+
+
+  const {user,logOut} = useContext(authContext)
+
+  const handleLogOut = () => {
+    logOut()
+      .then()
+      .catch((err) => console.log(err.message));
+  };
   const navItems = (
     <>
       <li>
@@ -23,6 +33,7 @@ const Navbar2 = () => {
       
     </>
   );
+
 
   return (
     <div className="navbar bg-base-100 mb-4">

@@ -7,12 +7,17 @@ import {
   BiLogoTwitter,
 } from "react-icons/bi";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { authContext } from "../../Provider/AuthProvider";
 import toast, { Toaster } from "react-hot-toast";
+import axios from "axios";
+import useAuth from "../../Hooks/useAuth";
 
 const Login = () => {
-  const { handleSignIn,googleLogin } = useContext(authContext);
+  const {handleSignIn,googleLogin} = useAuth()
+  // const { handleSignIn, googleLogin } = useContext(authContext);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -20,11 +25,30 @@ const Login = () => {
     const email = form.email.value;
     const password = form.password.value;
 
-    form.reset()
+    // form.reset();
+
     handleSignIn(email, password)
       .then((res) => {
         console.log(res.user);
-       
+
+        // const user = { email };
+        // axios.post("http://localhost:5000/jwt", user,{withCredentials:true})
+        // .then(res=>{
+        //   console.log(res.data);
+        // })
+
+        // const user = { email };
+        // axios
+        //   .post("http://localhost:5000/jwt", user, { withCredentials: true })
+        //   .then((res) => {
+        //     console.log(res.data);
+        //     if (res.data.success) {
+        //       navigate(location.state ? location.state : "/");
+        //     }
+        //   });
+
+        // navigate(location.state ? location.state : "/");
+
         toast.success("User Log In Successfully");
       })
       .catch((err) => {
@@ -32,14 +56,21 @@ const Login = () => {
       });
   };
 
-  const handleGoogleLogin = () =>{
+  const handleGoogleLogin = () => {
     googleLogin()
-    .then(res=>{
-      console.log(res.user);
-      toast.success('login successfully')
-    })
-    .catch(err =>console.log(err))
-  }
+      .then((res) => {
+        console.log(res.user);
+        // const user = {email}
+
+        // axios.post('http://localhost:5000/jwt',user)
+        // .then(data => {
+        //   console.log(data);
+        // })
+        // navigate(location.state ? location.state : "/");
+        toast.success("login successfully");
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <div>
@@ -81,7 +112,10 @@ const Login = () => {
                 forgot password?
               </p>
             </div>
-            <button type="submit" className="py-2 lg:py-3 bg-[#FF3811] text-white w-full mt-4 lg:mt-7 rounded-lg">
+            <button
+              type="submit"
+              className="py-2 lg:py-3 bg-[#FF3811] text-white w-full mt-4 lg:mt-7 rounded-lg"
+            >
               Sign In
             </button>
             <div className="text-center  py-4 mt-2">
@@ -91,7 +125,10 @@ const Login = () => {
                   <BiLogoFacebook className="bg-[#e4dddb] w-7 h-7 rounded-full  mx-auto"></BiLogoFacebook>
                 </div>
                 <div>
-                  <FcGoogle onClick={handleGoogleLogin} className="bg-[#ebe0de] w-7 h-7 rounded-full  mx-auto"></FcGoogle>
+                  <FcGoogle
+                    onClick={handleGoogleLogin}
+                    className="bg-[#ebe0de] w-7 h-7 rounded-full  mx-auto"
+                  ></FcGoogle>
                 </div>
                 <div>
                   <BiLogoTwitter className=" bg-[#eadedc] w-7 h-7 rounded-full  mx-auto"></BiLogoTwitter>

@@ -1,19 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
 import logo from "../../../../assets/logo.svg";
 
 import { Link, NavLink } from "react-router-dom";
+import { authContext } from "../../../Provider/AuthProvider";
 
 const Navbar = () => {
+  
+  const { user, logOut } = useContext(authContext);
   const navItems = (
     <>
       <li>
         <NavLink to="/">Home</NavLink>
       </li>
       <li>
-        <NavLink to="/about">About</NavLink>
+        <NavLink to="/addService">Add Service</NavLink>
       </li>
       <li>
-        <NavLink to="/service">Services</NavLink>
+        <NavLink  to="/service">Services</NavLink>
       </li>
       <li>
         <NavLink to="/blog">Blog</NavLink>
@@ -21,8 +24,19 @@ const Navbar = () => {
       <li>
         <NavLink to="/contact">Contact</NavLink>
       </li>
+      {user && (
+        <li>
+          <NavLink to="/bookings">Bookings</NavLink>
+        </li>
+      )}
     </>
   );
+
+  const handleLogOut = () => {
+    logOut()
+      .then()
+      .catch((err) => console.log(err.message));
+  };
 
   return (
     <div className="navbar bg-base-100 mb-4">
@@ -59,11 +73,28 @@ const Navbar = () => {
         <ul className="menu menu-horizontal mt-4 font-bold px-1">{navItems}</ul>
       </div>
       <div className="navbar-end">
-        <Link to="/login">
-          <button className="btn btn-outline font-bold outline-[#FF3811] text-[#FF3811]">
-            Appointment
-          </button>
-        </Link>
+        {user ? (
+          <>
+            <h1 className="mr-4">{user.displayName}</h1>
+            <img
+              className="w-[50px] mr-2 h-[50px] rounded-full"
+              src={user.photoURL}
+              alt=""
+            />
+            <button
+              onClick={handleLogOut}
+              className="px-3 py-2 bg-[#EF3811] text-white rounded-md"
+            >
+              Logout
+            </button>
+          </>
+        ) : (
+          <Link to="/login">
+            <button className="btn btn-outline font-bold outline-[#FF3811] text-[#FF3811]">
+              Appointment
+            </button>
+          </Link>
+        )}
       </div>
     </div>
   );

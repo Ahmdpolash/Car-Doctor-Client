@@ -12,7 +12,7 @@ import { authContext } from "../../Provider/AuthProvider";
 import toast, { Toaster } from "react-hot-toast";
 
 const Register = () => {
-  const { handleSignUp } = useContext(authContext);
+  const { handleSignUp,handleUpdate } = useContext(authContext);
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -28,6 +28,7 @@ const Register = () => {
     handleSignUp(email, password)
       .then((res) => {
         console.log(res.user);
+        handleUpdate()
         toast.success("user created successfully");
       })
       .catch((err) => {
